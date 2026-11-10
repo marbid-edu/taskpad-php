@@ -4,6 +4,10 @@
 
 Repository: https://github.com/marbid-edu/taskpad-php
 
+Live university demo: https://www-personal.umd.umich.edu/~marbid/taskpad/index.php
+
+The university demo passed 16 live checks. It uses dedicated private server-managed JSON storage because PHP cannot write to university home-drive files. The local version below continues to use data/tasks.json. The shared demo is for coursework; server maintenance may clear its data.
+
 A plain PHP task tracker with JSON persistence. No framework, database, JavaScript, or package installation is required to run the application. Tested with PHP **8.4.27**; this implementation requires PHP 8.1+ (`never`, `array_is_list`).
 
 ## Run locally in VS Code
