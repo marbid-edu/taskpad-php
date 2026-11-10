@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+actor "TaskPad user" as User
+rectangle TaskPad {
+  usecase "View tasks and counts" as View
+  usecase "Filter by text / priority" as Filter
+  usecase "Create task" as Create
+  usecase "Validate task input" as Validate
+  usecase "Complete task" as Complete
+  usecase "Delete task" as Delete
+}
+User --> View
+User --> Filter
+User --> Create
+User --> Complete
+User --> Delete
+Create ..> Validate : <<include>>
+Filter ..> View : <<extend>>
+note bottom of View
+Counts: total, in progress, completed.
+Filters combine with AND.
+end note
+note "CIS 435 - Mohamed Arbid" as Author
+@enduml

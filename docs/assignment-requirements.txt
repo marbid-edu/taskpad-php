@@ -1,0 +1,186 @@
+You may work in groups of up to three (3) people, though this is NOT required.  All member names should be on the documents submitted and in the comments when you submit your project. Please include a group evalDownload group eval
+ in the repository.
+
+
+Objectives 
+• Build a small server-side PHP web application that processes HTML forms and 
+returns dynamic pages. 
+• Use PHP superglobals ($_GET, $_POST, $_SERVER) safely to handle inputs and 
+HTTP flow.  
+• Create UML diagrams (at minimum: Use Case + Class; Activity optional) as part of 
+the analysis model. 
+• Demonstrate simple input validation/sanitization and basic HTTP responses 
+(including redirects and proper content types).  
+
+
+Overview 
+Build “TaskPad PHP”, a minimal task tracker where users can: 
+• Add a task (title required; optional description; priority: Low/Med/High; due date 
+optional). 
+• List tasks with simple filtering (by text and/or priority). 
+• Mark a task complete and delete tasks. 
+• Persist tasks in a flat JSON file on the server (no DB) to keep scope light for first
+PHP. 
+
+
+The app should: 
+• Serve an HTML form that posts to a PHP endpoint. 
+• Validate required fields server-side; echo friendly errors and re-render the form 
+with the user’s entries. 
+• On success, store the task and redirect to the list view to avoid double-submits 
+(PRG pattern).  
+• Provide a list view with filtering via query string (?q=search&priority=High) and 
+show counts. 
+• Allow “Complete”/“Delete” actions via POST 
+
+Requirements 
+Technology & Setup 
+• Plain PHP 7.4+ or 8.x
+• No frameworks; no DB. Persist tasks in /data/tasks.json (server-side JSON file). 
+• Keep server-side concerns (validation, sanitization, redirects, content type) in PHP.  
+• Use semantic HTML/CSS for a clean, responsive layout (consistent with Project 1/2 
+expectations). 
+
+
+Features 
+1. Create Task (POST) 
+o Fields: title (required), description (optional), priority (Low/Medium/High), due 
+(YYYY-MM-DD optional). 
+o Server-side validation: title non-empty; due date format if provided. 
+o On validation error: re-render form; preserve inputs; show inline messages. 
+o On success: append to JSON store; redirect to list view (PRG).  
+
+
+2. List & Filter Tasks (GET) 
+o Display all tasks with badges for priority and state (Open/Completed). 
+o Filters: text query q matches title or description (case-insensitive), and priority 
+filter. 
+o Show empty and “no matches” states. 
+
+
+3. Complete/Delete (POST) 
+o Buttons in the list perform actions
+o After action, redirect back to the list with a flash message. 
+
+
+4. Data Model (minimum) 
+{ 
+"id": "string-uuid-or-timestamp", 
+"title": "string", 
+"description": "string", 
+"priority": "Low|Medium|High", 
+"due": "YYYY-MM-DD|null", 
+"completed": false 
+} 
+
+
+Server-Side Input Handling & Security 
+• Use $_POST/$_GET to read inputs.  
+• Sanitize/validate before using or storing (e.g., trim, length checks, whitelist for priority, 
+simple date regex). 
+• If you generate links with query strings, ensure you safely consume them.  
+• If you ever echo user data back into HTML, escape appropriately to avoid XSS. 
+• For any non-idempotent operation, use POST (not GET). 
+• Use header('Location: ...') for redirects and set appropriate Content-Type where 
+needed (e.g., JSON test output).  
+
+
+Recommended File Structure 
+taskpad-php/ 
+public/ 
+index.php         
+  # list & filter (GET), flash messages 
+create.php        
+actions.php       
+assets/           
+src/ 
+storage.php       
+validation.php            
+data/ 
+tasks.json        
+  # form (GET) + handler (POST) 
+  # complete/delete handlers (POST) 
+  # css/img 
+  # load/save JSON helpers 
+  # validation/sanitization helpers 
+# token generate/verify 
+  # session flash messages 
+  # persisted tasks (created at first save) 
+docs/ 
+uml-usecase.pdf 
+uml-class.pdf 
+uml-activity.pdf  
+README.md 
+
+Specific Descriptions of Special Deliverables 
+UML 
+Create these diagrams for TaskPad PHP: 
+1. Use Case Diagram (actors: Visitor/User) 
+o Use cases: Create task, List tasks, Filter, Complete, Delete. 
+2. Class Diagram (analysis-level) 
+o Task, TaskRepository (JSON persistence), Validator, Controller (optional). 
+You may use an open source, free tool like draw.io/diagrams.net or PlantUML. If using 
+PlantUML, include the source in /docs/uml/*.puml and export PDFs. 
+ 
+E.g., PlantUML (Class Diagram Snippet): 
+@startuml 
+class Task { 
+  - id : string 
+  - title : string 
+  - description : string 
+  - priority : string 
+  - due : ?date 
+  - completed : bool 
+} 
+ 
+class TaskRepository { 
+  - path : string 
+  + all() : Task[] 
+  + add(Task) : void 
+  + update(Task) : void 
+  + delete(id:string) : void 
+} 
+ 
+class Validator { 
+  + validateCreate(input:array) : array /* returns [isValid, errors, 
+sanitized] */ 
+} 
+ 
+TaskRepository "1" o-- "*" Task 
+@enduml 
+ 
+Validation & Sanitization Hints (PHP) 
+• Use trim, length checks, and a whitelist array for priority. 
+• Simple date check: /^\d{4}-\d{2}-\d{2}$/ plus checkdate. 
+• When echoing user text, escape entities. 
+• If you ever pass values into a URL or external system later in the course, use safe 
+APIs and escaping (the text discusses sanitizing query strings).  
+UI/UX & Accessibility 
+• Match Project 1/2 cleanliness: spacing, readable contrast, focus styles. 
+• Responsive layout for phone/tablet/desktop. 
+• Provide clear success/error/empty states. 
+Deliverables Checklist 
+URL of the github repository
+ Screenshots of desktop/tablet/mobile for: 
+o Create form (error + success states), 
+o List view with and without filters, 
+o Complete/Delete in action (before/after). 
+ UML PDFs in /docs and, if using PlantUML, the .puml sources. 
+
+ README.md with run instructions: 
+
+o Where screenshots/diagrams live. 
+
+Rubric 
+• Functionality (20 pts) 
+o Create/list/filter; complete/delete; persistence; PRG redirect; validation 
+messages. 
+
+• UML (5 pts) 
+
+• UI/UX & Responsiveness 5 pts) 
+o Clarity, empty/error/success states, mobile-first layout. 
+
+ 
+
+ 

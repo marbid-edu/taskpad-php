@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 0
+class "public/index.php" as Controller <<page controller>> {
+  + e(value: string): string
+  + scalar(source: array, key: string, default: string): string
+  + redirectToList(query: string, priority: string): never
+  + hiddenContext(): void
+  + fieldError(key: string): void
+  + errorAttributes(key: string): string
+}
+class Task {
+  + id: string
+  + title: string
+  + description: string
+  + priority: string
+  + due: ?string
+  + completed: bool
+  + createdAt: string
+  + {static} create(input: array): Task
+  + toArray(): array
+  + {static} fromArray(row: array): Task
+}
+class TaskRepository {
+  - path: string
+  + all(): array
+  + add(task: Task): void
+  + complete(id: string): void
+  + delete(id: string): void
+  - change(id: string, delete: bool): void
+  - access(update: ?callable): array
+}
+database "data/tasks.json" as Storage
+class Validator {
+  + {static} validateCreate(input: array): array
+}
+Controller ..> Task : creates / displays
+Controller ..> TaskRepository : reads / mutates
+Controller ..> Validator : validates input
+Task ..> Validator : validates stored records
+TaskRepository ..> Task : hydrates / serializes
+TaskRepository --> Storage : locked JSON read / write
+note "CIS 435 - Mohamed Arbid" as Author
+@enduml

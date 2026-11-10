@@ -1,0 +1,18 @@
+PASS: Empty state
+PASS: Security headers
+PASS: Invalid POST uses PRG
+PASS: Server validation and field errors
+PASS: Flash shown once
+PASS: CSRF blocks mutation
+PASS: Create and optional defaults
+PASS: Stored XSS escaped
+PASS: Combined case-insensitive filtering
+PASS: No matching results state
+PASS: Completion and filter context PRG
+PASS: Overall counts
+PASS: POST delete
+PASS: GET cannot delete
+PASS: Stale ID handled
+PASS: Array-shaped input handled
+PASS: Corrupt storage visible error
+PASS: Corrupt storage never overwritten

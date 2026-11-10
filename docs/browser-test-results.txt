@@ -1,0 +1,43 @@
+PASS: desktop empty fits viewport
+PASS: desktop inline server validation
+PASS: desktop create-error fits viewport
+PASS: desktop create success flash
+PASS: desktop create-success fits viewport
+PASS: desktop list-before-actions fits viewport
+PASS: desktop filter returns one task
+PASS: desktop list-filtered fits viewport
+PASS: desktop complete persisted
+PASS: desktop complete retains filters
+PASS: desktop complete-after fits viewport
+PASS: desktop delete-before fits viewport
+PASS: desktop delete persisted
+PASS: desktop delete-after fits viewport
+PASS: tablet empty fits viewport
+PASS: tablet inline server validation
+PASS: tablet create-error fits viewport
+PASS: tablet create success flash
+PASS: tablet create-success fits viewport
+PASS: tablet list-before-actions fits viewport
+PASS: tablet filter returns one task
+PASS: tablet list-filtered fits viewport
+PASS: tablet complete persisted
+PASS: tablet complete retains filters
+PASS: tablet complete-after fits viewport
+PASS: tablet delete-before fits viewport
+PASS: tablet delete persisted
+PASS: tablet delete-after fits viewport
+PASS: mobile empty fits viewport
+PASS: mobile inline server validation
+PASS: mobile create-error fits viewport
+PASS: mobile create success flash
+PASS: mobile create-success fits viewport
+PASS: mobile list-before-actions fits viewport
+PASS: mobile filter returns one task
+PASS: mobile list-filtered fits viewport
+PASS: mobile complete persisted
+PASS: mobile complete retains filters
+PASS: mobile complete-after fits viewport
+PASS: mobile delete-before fits viewport
+PASS: mobile delete persisted
+PASS: mobile delete-after fits viewport
+PASS: No browser page errors
